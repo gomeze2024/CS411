@@ -34,8 +34,8 @@ import requests
 # Ideally we will ask the user to input their zip code and country
 def get_weather_2():
 #   We can use the zip code and country
-    zip = '02134' 
-    country = 'US'
+    zip = input('Enter Zip Code (ex: 02134):\n') 
+    country = input('Enter Country (ex: US):\n')
 #   appid = Unique API key on account page
     appid = '537275397b9037ad50e8da9814692add'
 #    print ("\nZip Code: ",zip)
@@ -72,7 +72,7 @@ def get_weather_2():
     #temp_feels_like = ["main"]
     #["feels_like"]
 
-    print ("\nThe Weather In",location,",",zip,":\n","Temperature: ",main['temp'])
+    print ("\nThe Weather In",location,",",zip,":\n","Temperature: ",main['temp'],chr(176),"F")
 #    print ("Temperature: ",main['temp'])
 #    print ("Feels Like: ", main['feels_like'])
 #    print ("Low: ", main['temp_min'])
