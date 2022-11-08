@@ -38,30 +38,31 @@ def get_weather_2():
     country = 'US'
 #   appid = Unique API key on account page
     appid = '537275397b9037ad50e8da9814692add'
-    print ("\nZip Code: ",zip)
-    print ("\nCountry: ",country)
-    print ("\nAPI Key: ",appid)
+#    print ("\nZip Code: ",zip)
+#    print ("\nCountry: ",country)
+#    print ("\nAPI Key: ",appid)
 
 #   Create URL with zip & country to find the coordinates (lat & lon)
     CoordinateURL = ('http://api.openweathermap.org/geo/1.0/zip?zip=' + zip + (',') + country + '&appid=' + appid)
-    print ("\nThe URL used to find coordinates: ", CoordinateURL)
+#    print ("\nThe URL used to find coordinates: ", CoordinateURL)
 
 #   API call for coordinates
     response = requests.get(CoordinateURL).json()     # 'response' is now a dictionary with information about the location
-    print ("\nFull Response\n",response)
+#    print ("\nFull Response\n",response)
 #   Get lat and lon from response dictionary
     lat = response['lat']
     lon = response['lon']
-    print ("\nLatitude and Longitude\n",lat,lon)
+    location = response['name']
+#    print ("\nLatitude and Longitude\n",lat,lon)
 
 #   Create URL to access weather
 #   Added ("&units=Imperial") so that temperature is in Fahrenheit
     WeatherURL = ('http://api.openweathermap.org/data/2.5/weather?lat=' + str(lat) + '&lon=' + str(lon) + '&appid=' + appid + '&units=Imperial')
-    print ("\nThe URL used to find the weather: ", WeatherURL)
+#    print ("\nThe URL used to find the weather: ", WeatherURL)
 
 #   API call for weather
     response2 = requests.get(WeatherURL).json()
-    print ("\nFull Response (2)\n",response2)
+#    print ("\nFull Response (2)\n",response2)
     
 #   Get weather info
     weather_main = response2['weather'][0]["main"]
@@ -71,12 +72,12 @@ def get_weather_2():
     #temp_feels_like = ["main"]
     #["feels_like"]
 
-    print ("\nWeather: ",weather_main)
-    print ("Temperature: ",main['temp'])
-    print ("Feels Like: ", main['feels_like'])
-    print ("Low: ", main['temp_min'])
-    print ("High: ", main['temp_max'])
-    print ("Humidity: ", main['humidity'])
+    print ("\nThe Weather In",location,",",zip,":\n","Temperature: ",main['temp'])
+#    print ("Temperature: ",main['temp'])
+#    print ("Feels Like: ", main['feels_like'])
+#    print ("Low: ", main['temp_min'])
+#    print ("High: ", main['temp_max'])
+#    print ("Humidity: ", main['humidity'])
 
 
 
