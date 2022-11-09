@@ -151,4 +151,7 @@ def get_calendar():
     print (output)
 
 
-
+print ("\nFINDING YOUR WEATHER\n")
+get_weather_2()
+print ("\nGETTING NEWS\n")
+get_news_2()
