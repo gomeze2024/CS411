@@ -31,7 +31,7 @@ import requests
 # There are many more responses we can put to use.
 
 
-# Ideally we will ask the user to input their zip code and country
+# Asks user for zip code and country. Returns/prints city name and current temperature.
 def get_weather_2():
 #   We can use the zip code and country
     zip = input('Enter Zip Code (ex: 02134):\n') 
@@ -42,11 +42,11 @@ def get_weather_2():
 #    print ("\nCountry: ",country)
 #    print ("\nAPI Key: ",appid)
 
-#   Create URL with zip & country to find the coordinates (lat & lon)
+#   Create URL using the zip & country to find the coordinates (lat & lon)
     CoordinateURL = ('http://api.openweathermap.org/geo/1.0/zip?zip=' + zip + (',') + country + '&appid=' + appid)
 #    print ("\nThe URL used to find coordinates: ", CoordinateURL)
 
-#   API call for coordinates
+#   API call to get coordinates
     response = requests.get(CoordinateURL).json()     # 'response' is now a dictionary with information about the location
 #    print ("\nFull Response\n",response)
 #   Get lat and lon from response dictionary
@@ -60,7 +60,7 @@ def get_weather_2():
     WeatherURL = ('http://api.openweathermap.org/data/2.5/weather?lat=' + str(lat) + '&lon=' + str(lon) + '&appid=' + appid + '&units=Imperial')
 #    print ("\nThe URL used to find the weather: ", WeatherURL)
 
-#   API call for weather
+#   API call to get weather (temperature)
     response2 = requests.get(WeatherURL).json()
 #    print ("\nFull Response (2)\n",response2)
     
@@ -80,9 +80,43 @@ def get_weather_2():
 #    print ("Humidity: ", main['humidity'])
 
 
+def get_news_2():
+    api_key = 'pub_13171ec2935c971700ae44d5ab454b14e2bf3'
+    # language english
+    language = 'en'
+    # category world
+    category = 'world'
+
+    newsURL = "https://newsdata.io/api/1/news?apikey=" + str(api_key) + "&language=" + str(language) + "&category=" + str(category)    
+    response = requests.get(newsURL).json()
+# there are 4 main keys in the response: status, totalResults, results, and nextPage
+    keys = response.keys()
+    print ("\nkeys\n",keys)
+
+    status = response["status"]
+    print ("\nstatus\n",status)
+
+    totalResults = response["totalResults"]
+    print ("\ntotalResults\n",totalResults)
+
+    # the results contain everything; too much. We will only show the titles of articles
+    results = response["results"]
+    print (len(results))
+
+    print ("\nTitles:")
+    # can show max 10 titles
+    for x in range(10):
+        print(results[x]["title"])
+
+    print ("\nnextPage\n",response["nextPage"])
+
+
+#def get_calendar_2():
+
+
 
 def get_weather():
-    query = requests.args.get('Boston') #after the get i just put boston as an example but i am not sure how to make to like current location
+    query = requests.args.get('Boston') # after the get i just put boston as an example but i am not sure how to make to like current location
     api_key = '537275397b9037ad50e8da9814692add'
     response = requests.get("https://openweathermap.org/api", headers ={"Authorization": api_key})
 
@@ -118,5 +152,3 @@ def get_calendar():
 
 
 
-
-get_weather_2()
