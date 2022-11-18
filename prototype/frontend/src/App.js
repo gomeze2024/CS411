@@ -7,15 +7,36 @@ import { useState } from 'react';
 
 function App() {
   const [quote, setQuote] = useState('boohoo')
+  const [posts, setPosts] = useState([]);
+
   const getQuote = () => {
-    axios.get("http://localhost:8000/api/dressups/").then(
+    axios.get("http://localhost:8000/api/dressups/12/").then(
       (response) => {
-          setQuote(response.data[0].description)
+          setQuote(response.data["description"])
       }).catch(err => {
         console.log(err)
       })
-
   }
+
+  const pushQuote = () => {
+        axios.get("http://localhost:8000/api/dressups/5/").then(
+          (response) => {
+              setQuote(response.data["description"])
+          }).catch(err => {
+            console.log(err)
+          })
+        axios.post("http://localhost:8000/api/dressups/",{
+            title: "lol",
+            description: "you did it congrats",
+            completed: true
+        })
+      }
+
+  const handleDelete = () => {
+    axios
+      .put("http://localhost:8000/api/dressups/5/")
+      .then((res) => this.refreshList());
+  };
   const weather = {
     name: 'Weather',
     qo: "Weather"
@@ -39,6 +60,12 @@ function App() {
     outline: "none",
     border: "none",
     cursor: "pointer"
+  };
+  const refreshList = () => {
+    axios
+      .get("/api/dressups/")
+      .then((res) => this.setState({ todoList: res.data }))
+      .catch((err) => console.log(err));
   };
 
   const Refresh = ({type}) => (
@@ -80,7 +107,7 @@ function App() {
       <motion.button style={charstyles}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95}}
-          onClick={() => setQuote("looking kinda sus there bud")}>
+          onClick={pushQuote}>
         <img src={MyImage} className="App-logo" alt="logo" />
       </motion.button>
       <Refresh
