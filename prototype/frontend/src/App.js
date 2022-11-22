@@ -4,10 +4,23 @@ import { Refresh } from "./components/charbutton";
 import MyImage from "./character.PNG"
 import axios from "axios";
 import { useState } from 'react';
+import { Tooltip, Form, Input, Button } from "@arco-design/web-react";
+import "@arco-design/web-react/dist/css/arco.css";
+const FormItem = Form.Item;
 
 function App() {
+  const [form] = Form.useForm();
   const [quote, setQuote] = useState('boohoo')
-  const [posts, setPosts] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  const onSubmit = async () => {
+    const { Color, Clothing } = await form.validate();
+    setQuote(
+      `Your favorite color is ${Color}, favorite Clothing is ${Clothing}`
+    );
+    form.resetFields()
+    // api对接
+  };
 
   const getQuote = () => {
     axios.get("http://localhost:8000/api/dressups/12/").then(
@@ -120,6 +133,28 @@ function App() {
        type = {calendar}>
       </Refresh>
     </div>
+        <Form
+          form={form}
+          style={{ width: 600, margin: "auto" }}
+          autoComplete="off"
+          onSubmit={onSubmit}
+        >
+          <FormItem label="Color" field="Color" rules={[{ required: true }]}>
+            <Input placeholder="please enter your favorite Color..." />
+          </FormItem>
+          <FormItem
+            label="Clothing"
+            field="Clothing"
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="please enter your favorite Clothing..." />
+          </FormItem>
+          <FormItem wrapperCol={{ offset: 5 }} rules={[{ required: true }]}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </FormItem>
+        </Form>
     <p style={{
           display: "flex",
           justifyContent: "center",
