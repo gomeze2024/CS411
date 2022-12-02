@@ -24,4 +24,5 @@ router.register(r'dressups', views.DressUpView, 'dressup')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
