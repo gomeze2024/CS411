@@ -17,12 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from dressup import views
+from userinfo import userviews
 
 router = routers.DefaultRouter()
 router.register(r'dressups', views.DressUpView, 'dressup')
+router.register(r'userinfo', userviews.UserInfoView, 'userinfo')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+     path('api/', include(router.urls)),
 ]

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-03&so$u9s&_os%y$gsf3gax_pywx)1d6)cnjukrp8em^1d3n4$'
+SECRET_KEY = config("DJANGO_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
+
+    # Third-Party Apps
     'rest_framework',
+    'corsheaders',
     'dressup',
+    'userinfo',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -73,6 +78,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+AUTHENTICATION_BACKENDS = (
+   'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTHENTICATION_BACKENDS = (
+    # Django
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -83,7 +96,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
