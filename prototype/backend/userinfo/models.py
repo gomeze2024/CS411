@@ -1,6 +1,7 @@
 from django.db import models
-from backend.api import get_weather_2
+from .api import get_weather_2, get_news_2
 # Create your models here.
+
 list_display = ('id', 'user_email', 'location', 'weather', 'news','color')
 class UserInfo(models.Model):
     id = models.CharField(max_length=320, default=0, primary_key=True)
@@ -12,3 +13,9 @@ class UserInfo(models.Model):
 
     def _str_(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        ip_string = self.location
+        self.weather = get_weather_2 (ip_string)
+        self.news = get_news_2 ()
+        super().save(*args, **kwargs) 
