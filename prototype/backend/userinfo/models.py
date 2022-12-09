@@ -1,5 +1,5 @@
 from django.db import models
-from .api import get_weather_2
+from backend.api import get_weather_2
 # Create your models here.
 list_display = ('id', 'user_email', 'location', 'weather', 'news','color')
 class UserInfo(models.Model):

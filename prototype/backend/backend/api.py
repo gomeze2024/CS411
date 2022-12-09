@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from decouple import config
 import requests
 
 
@@ -38,9 +39,7 @@ def get_weather_2():
     zip = '02134' 
     country = 'US'
 #   appid = Unique API key on account page
-    appid = '537275397b9037ad50e8da9814692add'
-    weather_string = "Zip Code: " + zip + "\nCountry: " + country + "\nAPI Key: " + appid
-
+    appid = config("WEATHER_KEY")
 
 #   Create URL with zip & country to find the coordinates (lat & lon)
     CoordinateURL = ('http://api.openweathermap.org/geo/1.0/zip?zip=' + zip + (',') + country + '&appid=' + appid)
@@ -75,7 +74,7 @@ def get_weather_2():
 
 def get_weather():
     query = requests.args.get('Boston') #after the get i just put boston as an example but i am not sure how to make to like current location
-    api_key = '537275397b9037ad50e8da9814692add'
+    api_key = config("WEATHER_KEY")
     response = requests.get("https://openweathermap.org/api", headers ={"Authorization": api_key})
 
     output = []
@@ -99,7 +98,7 @@ def get_news():
 #google calendar api was not popping up for me so if u find one just put in the quotes i left blank
 def get_calendar():
     query = requests.get('Day') #same shit here 
-    api_key = 'AIzaSyAXjToh5jVHclejTaMm0X58EpB7xJWdYOk'
+    api_key = config("CALENDAR_KEY")
     response = requests.get("https://www.googleapis.com/calendar/v3", headers ={"Authorization": api_key})
 
     output = []
