@@ -31,80 +31,89 @@ import requests
 # There are many more responses we can put to use.
 
 
-# Ideally we will ask the user to input their zip code and country
+# Asks user for zip code and country. Returns/prints city name and current temperature.
 def get_weather_2():
-    weather_string = ""
 #   We can use the zip code and country
-    zip = '02134' 
-    country = 'US'
+    zip = input('Enter Zip Code (ex: 02134):\n') 
+    country = input('Enter Country (ex: US):\n')
 #   appid = Unique API key on account page
     appid = '537275397b9037ad50e8da9814692add'
-    weather_string = "Zip Code: " + zip + "\nCountry: " + country + "\nAPI Key: " + appid
+#    print ("\nZip Code: ",zip)
+#    print ("\nCountry: ",country)
+#    print ("\nAPI Key: ",appid)
 
-
-#   Create URL with zip & country to find the coordinates (lat & lon)
+#   Create URL using the zip & country to find the coordinates (lat & lon)
     CoordinateURL = ('http://api.openweathermap.org/geo/1.0/zip?zip=' + zip + (',') + country + '&appid=' + appid)
-    weather_string = weather_string + "\nThe URL used to find coordinates: " + CoordinateURL
+#    print ("\nThe URL used to find coordinates: ", CoordinateURL)
 
-#   API call for coordinates
+#   API call to get coordinates
     response = requests.get(CoordinateURL).json()     # 'response' is now a dictionary with information about the location
+    print (response)
+#    print ("\nFull Response\n",response)
 #   Get lat and lon from response dictionary
     lat = response['lat']
     lon = response['lon']
-    weather_string = weather_string + "\nLatitude and Longitude\n" + str(lat) + str(lon)
+    location = response['name']
+#    print ("\nLatitude and Longitude\n",lat,lon)
 
 #   Create URL to access weather
 #   Added ("&units=Imperial") so that temperature is in Fahrenheit
     WeatherURL = ('http://api.openweathermap.org/data/2.5/weather?lat=' + str(lat) + '&lon=' + str(lon) + '&appid=' + appid + '&units=Imperial')
-    weather_string = weather_string + "\nThe URL used to find the weather: " + WeatherURL
+#    print ("\nThe URL used to find the weather: ", WeatherURL)
 
-#   API call for weather
+#   API call to get weather (temperature)
     response2 = requests.get(WeatherURL).json()
+#    print ("\nFull Response (2)\n",response2)
     
 #   Get weather info
     weather_main = response2['weather'][0]["main"]
     #weather_description = response2['weather'][0]["description"]
     main = response2["main"]
+    print (response2)
     #["temp"]
     #temp_feels_like = ["main"]
     #["feels_like"]
-    
-    weather_string = weather_string + "\nWeather: " + str(weather_main) + " Temperature: " + str(main['temp']) + " Feels Like: "\
-         + str(main['feels_like']) + " Low: " +  str(main['temp_min']) + " High: " + str(main['temp_max']) + " Humidity: " + str(main['humidity'])
-    return weather_string
 
-def get_weather():
-    query = requests.args.get('Boston') #after the get i just put boston as an example but i am not sure how to make to like current location
-    api_key = '537275397b9037ad50e8da9814692add'
-    response = requests.get("https://openweathermap.org/api", headers ={"Authorization": api_key})
+    #print ("\nThe Weather In",location,",",zip,":\n","Temperature: ",main['temp'],chr(176),"F")
+#    print ("Temperature: ",main['temp'])
+#    print ("Feels Like: ", main['feels_like'])
+#    print ("Low: ", main['temp_min'])
+#    print ("High: ", main['temp_max'])
+#    print ("Humidity: ", main['humidity'])
 
-    output = []
-    for weather in responses.json()['weather']:
-        output.append(weather['src']['original'])
-    
-    print (output)
-
-def get_news():
-    query = requests.get('News') #same thing here dont know hwo to get current news
+def get_news_2():
     api_key = 'pub_13171ec2935c971700ae44d5ab454b14e2bf3'
-    response = requests.get("https://newsdata.io/search-news", headers ={"Authorization": api_key})
+    # language english
+    language = 'en'
+    # category world
+    category = 'world'
 
-    output = []
-    for news in response.json()['News']:
-        output.append(news['src']['original'])
-    
-    print (output)
+    newsURL = "https://newsdata.io/api/1/news?apikey=" + str(api_key) + "&language=" + str(language) + "&category=" + str(category)    
+    response = requests.get(newsURL).json()
+# there are 4 main keys in the response: status, totalResults, results, and nextPage
+    keys = response.keys()
+    #print ("\nkeys\n",keys)
+
+    status = response["status"]
+    #print ("\nstatus\n",status)
+
+    totalResults = response["totalResults"]
+    #print ("\ntotalResults\n",totalResults)
+
+    # the results contain everything; too much. We will only show the titles of articles
+    results = response["results"]
+    #print (len(results))
+
+    #print ("\nTitles:")
+    # can show max 10 titles
+    #for x in range(10):
+    #    print(results[x]["title"])
+    print (response)
+    #print (results)
+    #print ("\nnextPage\n",response["nextPage"])
+
+get_weather_2()
+get_news_2()
 
 
-#google calendar api was not popping up for me so if u find one just put in the quotes i left blank
-def get_calendar():
-    query = requests.get('Day') #same shit here 
-    api_key = 'AIzaSyAXjToh5jVHclejTaMm0X58EpB7xJWdYOk'
-    response = requests.get("https://www.googleapis.com/calendar/v3", headers ={"Authorization": api_key})
-
-    output = []
-    for day in response.json()['day']:
-        output.append(day['src']['original'])
-    
-    print (output)
 
