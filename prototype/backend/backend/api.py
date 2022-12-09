@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from decouple import config
 import requests
 
 
@@ -34,6 +33,7 @@ import requests
 
 # Asks user for zip code and country. Returns/prints city name and current temperature.
 def get_weather_2():
+    print ('\nGetting Weather\n')
 #   We can use the zip code and country
     zip = input('Enter Zip Code (ex: 02134):\n') 
     country = input('Enter Country (ex: US):\n')
@@ -83,6 +83,7 @@ def get_weather_2():
 #    print ("Humidity: ", main['humidity'])
 
 def get_news_2():
+    print ('\nGetting News\n')
     api_key = 'pub_13171ec2935c971700ae44d5ab454b14e2bf3'
     # language english
     language = 'en'
