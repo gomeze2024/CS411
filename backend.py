@@ -81,7 +81,7 @@ def get_weather_2():
 
 
 def get_news_2():
-    api_key = 'pub_13171ec2935c971700ae44d5ab454b14e2bf3'
+    api_key = 'f0157fe6ce4946529eacb824535efcaf'
     # language english
     language = 'en'
     # category world
@@ -102,7 +102,10 @@ def get_news_2():
     # the results contain everything; too much. We will only show the titles of articles
     results = response["results"]
     print (len(results))
-
+    
+    api.get_everything(q='bitcoin')
+    
+    api.get_sources()
     print ("\nTitles:")
     # can show max 10 titles
     for x in range(10):
