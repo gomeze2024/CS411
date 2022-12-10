@@ -40,6 +40,7 @@ function Interact() {
       alignItems: "center",
       backgroundColor: '#f2f9ff'
     }}>
+    {id}
     <div
         style={{
           display: "flex",
