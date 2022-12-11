@@ -36,7 +36,6 @@ def get_weather(zip_code):
         "comment": comment
     }
     # Return the temperature in Fahrenheit
-<<<<<<< HEAD
     return json.dumps(weather_data)
 
 
@@ -46,7 +45,6 @@ def get_news(language, category):
   url = "https://newsdata.io/api/1/news?apikey={}&language={}&category={}".format(api_key, language, category)
   response = requests.get(url)
   results = response.json()['results']
-  comment = set_comment(results)
   news_data = {
     "News 1": (response.json()['results'][0]['title'], response.json()['results'][0]['country'][0], response.json()['results'][0]['description']),
     "News 2": (response.json()['results'][1]['title'], response.json()['results'][1]['country'][0], response.json()['results'][1]['description']),
@@ -57,9 +55,3 @@ def get_news(language, category):
   
   return json.dumps(news_data)
 
-
-print (get_weather('02134'))
-print (get_news('en', 'world'))
-=======
-    return weather_data
->>>>>>> b060a4af3adef94b0b15ad65245e840fbaafffed
