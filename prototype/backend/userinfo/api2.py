@@ -37,11 +37,3 @@ def get_weather(zip_code):
     }
     # Return the temperature in Fahrenheit
     return json.dumps(weather_data)
-
-# View function to handle the request and render the response
-def weather_view(request):
-    zip_code = request.GET.get('zip')
-    temperature = get_weather(zip_code)
-    return render(request, 'weather.html', {'temperature': temperature, 'zip_code': zip_code})
-
-print(get_weather("10462"))
