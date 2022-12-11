@@ -1,4 +1,5 @@
 from django.db import models
+
 # Create your models here.
 list_display = ('id', 'user_num', 'user_database')
 class User(models.Model):
