@@ -36,4 +36,4 @@ def get_weather(zip_code):
         "comment": comment
     }
     # Return the temperature in Fahrenheit
-    return json.dumps(weather_data)
+    return weather_data

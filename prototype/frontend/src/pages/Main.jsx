@@ -29,7 +29,7 @@ function MainPage() {
     await axios.post('http://localhost:8000/api/userinfo/', {
       id: profile.replace('.',''),
       user_email: profile,
-      location: "10462",
+      location: "02215",
       weather: "We can't update your weather without your location. Give it to us please",
       news: "We can't update your news without your location. Give it to us please",
       color: "We can't update your color without you updating your color. Give it to us please"
