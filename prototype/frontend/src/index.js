@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainPage from "./pages/Main";
 import LoginPage from "./pages/Login";
 import InteractPage from "./pages/Interact";
-import ApiPage from "./pages/Api";
+import Weather from "./pages/Weather";
+import News from "./pages/News";
 import CustomizePage from "./pages/Customize";
 
 const router = createBrowserRouter([
@@ -23,8 +24,12 @@ const router = createBrowserRouter([
     element: <InteractPage />,
   },
   {
-    path: "/api",
-    element: <ApiPage />,
+    path: "/weather",
+    element: <Weather />,
+  },
+  {
+    path: "/news",
+    element: <News />,
   },
   {
     path: "/customize",

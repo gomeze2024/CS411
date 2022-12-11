@@ -22,10 +22,10 @@ function MainPage() {
     await axios.get("http://localhost:8000/api/userinfo/" + Id).then(
       (response) => {
       }).catch(err => {
-        put()
+        post()
       })
   }
-  const put = async () =>  {
+  const post = async () =>  {
     await axios.post('http://localhost:8000/api/userinfo/', {
       id: profile.replace('.',''),
       user_email: profile,
@@ -40,7 +40,20 @@ function MainPage() {
     .catch(function (error) {
     console.log(error);
    });
-}
+  }
+
+  const put = async () =>  {
+    await axios.put('http://localhost:8000/api/userinfo/' + Id, {
+      user_email: profile,
+      location: "02215",
+  })
+    .then(function (response) {
+    console.log(response);
+    })
+    .catch(function (error) {
+    console.log(error);
+   });
+  }
 
   const weather = {
     name: 'Weather',
@@ -74,7 +87,6 @@ function MainPage() {
   }
 
   const Refresh = ({type}) => (
-    <Link to="/api" >
     <motion.button
       style={styles}
       whileHover={{ scale: 1.1 }}
@@ -82,7 +94,6 @@ function MainPage() {
     >
       {type.name}
     </motion.button>
-    </Link>
   );
 
   const charstyles = {
@@ -134,9 +145,12 @@ function MainPage() {
           background: '#f2f9ff'
         }}
       >
+      <Link to="/weather" >
       <Refresh
-        type = {weather}>
+        type = {weather}
+        onClick = {put}>
       </Refresh>
+      </Link>
       <Link to="/interact" >
       <motion.button style={charstyles}
           whileHover={{ scale: 1.05 }}
@@ -144,11 +158,13 @@ function MainPage() {
           >
         <img src={MyImage} className="App-logo" alt="logo" />
       </motion.button>
-       </Link>
+      </Link>
+      <Link to="/news" >
       <Refresh 
-        type = {news}>
+        type = {news}
+        onClick = {put}>
       </Refresh>
-
+      </Link>
     </div>
     <p style={{
           display: "flex",

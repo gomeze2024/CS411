@@ -1,6 +1,4 @@
 import requests
-from django.shortcuts import render
-import json
 
 def set_comment(condition):
   if (condition == "Thunderstorm"):
@@ -36,7 +34,7 @@ def get_weather(zip_code):
         "comment": comment
     }
     # Return the temperature in Fahrenheit
-    return json.dumps(weather_data)
+    return weather_data
 
 
 # Function to handle the request to the NewsData.io API
@@ -53,5 +51,5 @@ def get_news(language, category):
     "News 5": (response.json()['results'][4]['title'], response.json()['results'][4]['country'][0], response.json()['results'][4]['description'])
     }
   
-  return json.dumps(news_data)
+  return news_data
 
