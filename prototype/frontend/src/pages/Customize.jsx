@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect} from "react";
+import { useState} from "react";
+import { Form, Input, Button } from "@arco-design/web-react";
 //images//
 import based from "../components/base.PNG";
 import olived from "../components/olive.PNG";
@@ -37,6 +38,9 @@ import "../App.css";
 
 function CustomizePage() {
     var id = localStorage.getItem("user");
+    const FormItem = Form.Item;
+    const [form] = Form.useForm();
+    const [location, setLocation] = useState('10462');
     
     const body = {"body base": bodyBase, "body olive": bodyOlive, "body tan": bodyTan, "body dark": bodyDark, 
     "face base": faceBase, "face cool": faceCool, "face killme": faceBocchi, "face donham": faceDonham,
@@ -68,8 +72,8 @@ function CustomizePage() {
     const putData = async () =>  {
       if (id !== "null/") {
         await axios.put('http://localhost:8000/api/userinfo/' + id, {
-          location: "02215",
-          color: {
+          "location": location,
+          "color": {
             "base": bases,
             "face": faces,
             "hair": hairs,
@@ -84,6 +88,13 @@ function CustomizePage() {
         console.log(error);
        })};
       }
+    const onSubmit = async () => {
+        const { Color} = await form.validate();
+        setLocation(
+          `${Color}`
+        );
+        form.resetFields()
+      };
 
     function displayOptions (num) {
       if (type_con[0] === base_con[0]) {
@@ -225,6 +236,21 @@ function CustomizePage() {
         type = {continues}>
       </Refresh2>
       </Link>
+      <Form
+        form={form}
+        style={{ width: 600, margin: "auto" }}
+        autoComplete="off"
+        onSubmit={onSubmit}
+    >
+        <FormItem label="Location" field="Color" rules={[{ required: true }]}>
+            <Input placeholder="Please enter your ZIP code..." />
+        </FormItem>
+        <FormItem wrapperCol={{ offset: 5 }} rules={[{ required: true }]}>
+            <Button type="primary" htmlType="submit">
+                Submit
+            </Button>
+        </FormItem>
+    </Form>
     </div>
     <div class="center2">
       <Refresh 

@@ -14,6 +14,7 @@ import hairDonham from "../components/hair donham.PNG";
 import beard from "../components/beard.PNG";
 import NuLl from "../components/null.PNG";
 import outfitDonham from "../components/outfit donham.PNG";
+import background from "../components/background.PNG";
 
 import axios from "axios";
 import { useState, useEffect, React} from "react";
@@ -55,7 +56,7 @@ function MainPage() {
         setOutfit(response.data["color"]["outfit"])
       }).catch(err => {
         post()
-      })},100)
+      })},1000)
   }
   
 
@@ -85,7 +86,6 @@ function MainPage() {
   const put = async () =>  {
     await axios.put('http://localhost:8000/api/userinfo/' + Id, {
       user_email: profile,
-      location: "02215",
   })
     .then(function (response) {
     console.log(response);
@@ -154,7 +154,10 @@ function MainPage() {
     <div style={{
       justifyContent: "center",
       alignItems: "center",
-      background: '#f2f9ff'
+      backgroundImage: `url(${background})`,
+      backgroundPosition: 'center',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
     }}>
     <GoogleOAuthProvider clientId='135338852525-uodc4vsi2aucfl9lpnau5i32h98efmrd.apps.googleusercontent.com'>
     <GoogleLogin
@@ -187,7 +190,6 @@ function MainPage() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: '#f2f9ff'
         }}
       >
       <Link to="/weather" >
@@ -216,7 +218,7 @@ function MainPage() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: '#f2f9ff'
+          backgroundImage: `url(${background})`
         }}>
 
     <Link to="/interact" >

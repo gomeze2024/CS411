@@ -7,7 +7,7 @@ list_display = ('id', 'user_email', 'location', 'weather', 'news','color')
 class UserInfo(models.Model):
     id = models.CharField(max_length=320, default=0, primary_key=True)
     user_email = models.CharField(max_length=320, default="")
-    location = models.TextField(default= "We don't have your location yet. Give it to us please")
+    location = models.TextField(default= "02215")
     weather = models.JSONField(default= {})
     news = models.JSONField(default= {})
     color = models.JSONField(default= {})
