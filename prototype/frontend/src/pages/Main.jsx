@@ -1,7 +1,20 @@
 import "../App.css";
 import { motion } from "framer-motion";
-import MyImage from "../components/body base.PNG";
-import MyEyes from "../components/face base.PNG";
+import bodyBase from "../components/body base.PNG";
+import bodyOlive from "../components/body olive.PNG";
+import bodyTan from "../components/body tan.PNG";
+import bodyDark from "../components/body dark.PNG";
+import faceBase from "../components/face base.PNG";
+import faceCool from "../components/face cool.PNG";
+import faceBocchi from "../components/face aaa.PNG";
+import faceDonham from "../components/face donham.PNG";
+import hairBase from "../components/hair base.PNG";
+import hairEndmark from "../components/hair endmark.PNG";
+import hairDonham from "../components/hair donham.PNG";
+import beard from "../components/beard.PNG";
+import NuLl from "../components/null.PNG";
+import outfitDonham from "../components/outfit donham.PNG";
+
 import axios from "axios";
 import { useState, useEffect, React} from "react";
 import "@arco-design/web-react/dist/css/arco.css";
@@ -12,20 +25,40 @@ import jwt_decode from "jwt-decode"
 function MainPage() {
   const [profile, setProfile ] = useState([]);
   var id = localStorage.getItem("user");
+
+  const body = {"body base": bodyBase, "body olive": bodyOlive, "body tan": bodyTan, "body dark": bodyDark, 
+    "face base": faceBase, "face cool": faceCool, "face killme": faceBocchi, "face donham": faceDonham,
+    "hair base": hairBase, "hair endmark": hairEndmark, "hair donham": hairDonham, 
+    "beard": beard, "null": NuLl, "outfit donham": outfitDonham}
+
   const [Id, setId] = useState('null/')
+  const [base, setBase] = useState("body base")
+  const [face, setFace] = useState("face base")
+  const [hair, setHair] = useState("hair base")
+  const [access, setAccess] = useState("null")
+  const [outfit, setOutfit] = useState("null")
 
   useEffect(() => {
     googleLogout()
     setId(id)
+    getData()
   })
 
   const getData = async () => {
-    await axios.get("http://localhost:8000/api/userinfo/" + Id).then(
+    setTimeout(() => {
+    axios.get("http://localhost:8000/api/userinfo/" + Id).then(
       (response) => {
+        setBase(response.data["color"]["base"])
+        setFace(response.data["color"]["face"])
+        setHair(response.data["color"]["hair"])
+        setAccess(response.data["color"]["accessory"])
+        setOutfit(response.data["color"]["outfit"])
       }).catch(err => {
         post()
-      })
+      })},100)
   }
+  
+
   const post = async () =>  {
     await axios.post('http://localhost:8000/api/userinfo/', {
       id: profile.replace('.',''),
@@ -33,8 +66,14 @@ function MainPage() {
       location: "02215",
       weather: "We can't update your weather without your location. Give it to us please",
       news: "We can't update your news without your location. Give it to us please",
-      color: "We can't update your color without you updating your color. Give it to us please"
-  })
+      color: {
+        "base": "body base",
+        "face": "face base",
+        "hair": "hair base",
+        "accessory": "null",
+        "outfit": "null"
+      }}
+    )
     .then(function (response) {
     console.log(response);
     })
@@ -117,7 +156,6 @@ function MainPage() {
       alignItems: "center",
       background: '#f2f9ff'
     }}>
-      
     <GoogleOAuthProvider clientId='135338852525-uodc4vsi2aucfl9lpnau5i32h98efmrd.apps.googleusercontent.com'>
     <GoogleLogin
     onSuccess={credentialResponse => {
@@ -182,12 +220,15 @@ function MainPage() {
         }}>
 
     <Link to="/interact" >
-      <motion.button class="imageWrapper" style={charstyles}
+      <motion.button class="imageWrapper2" style={charstyles}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95}}
           >
-        <img src={MyImage} class="overlayImage"/>
-        <img src={MyEyes} class="overlayImage"/>
+        <img src={body[base]} class="overlayImage"/>
+        <img src={body[face]} class="overlayImage"/>
+        <img src={body[outfit]} class="overlayImage"/>
+        <img src={body[access]} class="overlayImage"/>
+        <img src={body[hair]} class="overlayImage"/>
       </motion.button>
       </Link>
         </p>

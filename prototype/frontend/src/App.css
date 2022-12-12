@@ -12,12 +12,29 @@
   }
 }
 
+.App-logo {
+  height: 20vmin;
+  width: 30vmin;
+  pointer-events: none;
+}
+
 .imageWrapper {
   position: relative;
 }
 .overlayImage {
   text-align: center;
   height: 70vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.imageWrapper2 {
+  position: relative;
+}
+.overlayImage2 {
+  text-align: center;
+  height: 60vmin;
   position: absolute;
   top: 0;
   left: 0;
@@ -79,12 +96,16 @@
 
 .flex-child:first-child {
   margin-right: 20px;
-} 
+}
+
+.ineedtosleep{
+  padding: 500px 0px;
+}
 
 .pagination {
   font-family: 'Muli',sans-serif;
   display: inline-block;
-  font-size: 30px;
+  background-size: 100% 100%;
   text-align: center;
   padding: 75px 0px;
 }
@@ -92,15 +113,16 @@
 .pagination a {
   color: black;
   float: left;
-  padding: 50px 70px;
+  padding: 20px 30px;
+  height: 10vmin;
+  width: 20vmin;
   text-decoration: none;
 }
 
 .pagination a.active {
-  background-color: #ddd;
+  background-color: #a5dcf0;
   color: white;
 }
-.pagination a:hover:not(.active) {background-color: #ddd;}
 
 @keyframes App-logo-spin {
   from {

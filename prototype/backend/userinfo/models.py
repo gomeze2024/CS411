@@ -6,11 +6,11 @@ from .api import get_weather, get_news
 list_display = ('id', 'user_email', 'location', 'weather', 'news','color')
 class UserInfo(models.Model):
     id = models.CharField(max_length=320, default=0, primary_key=True)
-    user_email = models.CharField(max_length=320)
+    user_email = models.CharField(max_length=320, default="")
     location = models.TextField(default= "We don't have your location yet. Give it to us please")
     weather = models.JSONField(default= {})
     news = models.JSONField(default= {})
-    color = models.TextField(default=  "We can't update your color without you updating your color. Give it to us please")
+    color = models.JSONField(default= {})
 
     def _str_(self):
         return self.title
