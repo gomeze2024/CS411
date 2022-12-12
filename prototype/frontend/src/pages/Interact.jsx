@@ -1,7 +1,6 @@
 import '../App.css';
 import { motion } from "framer-motion";
-import MyImage from "../character.PNG"
-
+import MyImage from "../components/character.PNG"
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button } from "@arco-design/web-react";
 import "@arco-design/web-react/dist/css/arco.css";

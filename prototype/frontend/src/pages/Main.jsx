@@ -1,6 +1,7 @@
 import "../App.css";
 import { motion } from "framer-motion";
-import MyImage from "../character.PNG";
+import MyImage from "../components/body base.PNG";
+import MyEyes from "../components/face base.PNG";
 import axios from "axios";
 import { useState, useEffect, React} from "react";
 import "@arco-design/web-react/dist/css/arco.css";
@@ -61,13 +62,16 @@ function MainPage() {
   const news = {
     name: 'News',
   }
+  const customize = {
+    name: 'Customize',
+  }
   
   const styles = {
     background: "#2596be",
     borderRadius: 30,
     width: 150,
     padding: "10px 20px",
-    margin: "auto",
+    margin: "5px",
     color: "#F7F7F0",
     outline: "#F7F7F0",
     border: "10px",
@@ -113,6 +117,7 @@ function MainPage() {
       alignItems: "center",
       background: '#f2f9ff'
     }}>
+      
     <GoogleOAuthProvider clientId='135338852525-uodc4vsi2aucfl9lpnau5i32h98efmrd.apps.googleusercontent.com'>
     <GoogleLogin
     onSuccess={credentialResponse => {
@@ -127,6 +132,7 @@ function MainPage() {
       localStorage.setItem("user", "null/")
     }}
   />
+
     <motion.button 
       onClick= {credentialResponse => {googleLogout(); 
         localStorage.setItem("user", "null/")
@@ -137,6 +143,7 @@ function MainPage() {
         Logout
     </motion.button>
     </GoogleOAuthProvider>
+
     <div
         style={{
           display: "flex",
@@ -151,27 +158,40 @@ function MainPage() {
         onClick = {put}>
       </Refresh>
       </Link>
-      <Link to="/interact" >
-      <motion.button style={charstyles}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95}}
-          >
-        <img src={MyImage} className="App-logo" alt="logo" />
-      </motion.button>
-      </Link>
+
       <Link to="/news" >
       <Refresh 
         type = {news}
         onClick = {put}>
       </Refresh>
       </Link>
+      
+      <Link to="/customize" >
+      <Refresh 
+        type = {customize}
+        onClick = {put}>
+      </Refresh>
+      </Link>
+      
     </div>
     <p style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           background: '#f2f9ff'
-        }}></p>
+        }}>
+
+    <Link to="/interact" >
+      <motion.button class="imageWrapper" style={charstyles}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95}}
+          >
+        <img src={MyImage} class="overlayImage"/>
+        <img src={MyEyes} class="overlayImage"/>
+      </motion.button>
+      </Link>
+        </p>
+
     </div>
     );
   }

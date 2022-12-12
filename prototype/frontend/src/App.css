@@ -12,6 +12,17 @@
   }
 }
 
+.imageWrapper {
+  position: relative;
+}
+.overlayImage {
+  text-align: center;
+  height: 70vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -26,6 +37,70 @@
 .App-link {
   color: #61dafb;
 }
+
+.center {
+  font-family: 'Muli',sans-serif;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+
+.center2 {
+  font-size: 30px;
+  text-align: center;
+  padding: 75px 0px;
+}
+
+.right {
+  padding: 10px 30px;
+  font-size: 30px;
+  text-align: right;
+}
+
+.flex-container {
+  height: 60vmin;
+  display: flex;
+}
+
+.flex-child {
+  padding: 50px 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  background-image: linear-gradient(rgba(83, 153, 234, 0.922),rgba(215, 224, 250, 0.922), rgb(239, 245, 255));
+}  
+
+.flex-child2 {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 15%;
+  background-color: #ffffff;
+} 
+
+.flex-child:first-child {
+  margin-right: 20px;
+} 
+
+.pagination {
+  font-family: 'Muli',sans-serif;
+  display: inline-block;
+  font-size: 30px;
+  text-align: center;
+  padding: 75px 0px;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 50px 70px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #ddd;
+  color: white;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
 @keyframes App-logo-spin {
   from {
