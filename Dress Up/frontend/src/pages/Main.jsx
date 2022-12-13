@@ -26,7 +26,8 @@ import jwt_decode from "jwt-decode"
 function MainPage() {
   const [profile, setProfile ] = useState([]);
   var id = localStorage.getItem("user");
-
+  var clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID
+  
   const body = {"body base": bodyBase, "body olive": bodyOlive, "body tan": bodyTan, "body dark": bodyDark, 
     "face base": faceBase, "face cool": faceCool, "face killme": faceBocchi, "face donham": faceDonham,
     "hair base": hairBase, "hair endmark": hairEndmark, "hair donham": hairDonham, 
@@ -159,7 +160,7 @@ function MainPage() {
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
     }}>
-    <GoogleOAuthProvider clientId='135338852525-uodc4vsi2aucfl9lpnau5i32h98efmrd.apps.googleusercontent.com'>
+    <GoogleOAuthProvider clientId={clientId}>
     <GoogleLogin
     onSuccess={credentialResponse => {
       console.log(credentialResponse);

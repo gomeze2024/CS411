@@ -17,7 +17,7 @@ def set_comment(condition):
 
 # Function to handle the request to the OpenWeatherMap API
 def get_weather(zip_code):
-    api_key = "537275397b9037ad50e8da9814692add"
+    api_key = config("WEATHER_KEY")
     # URL for the OpenWeatherMap API
     url = "http://api.openweathermap.org/data/2.5/weather?zip={}&units=imperial&appid={}".format(zip_code, api_key)
     # Send the request and get the response
@@ -42,7 +42,7 @@ def get_news():
   language = 'en'
   category = 'world'
 
-  api_key = 'pub_13171ec2935c971700ae44d5ab454b14e2bf3'
+  api_key = config("NEWS_KEY")
   url = "https://newsdata.io/api/1/news?apikey={}&language={}&category={}".format(api_key, language, category)
   response = requests.get(url)
   results = response.json()['results']

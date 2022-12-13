@@ -74,7 +74,7 @@ function WeatherPage() {
         <div class="flex-child3">
         <h1 class = "center3">{location}</h1>
         <h1 class = "center4">{temperature}</h1>
-        <h1 class = "center">description</h1>
+        <h1 class = "center">{description}</h1>
         <h1 class = "center4">{highlow}</h1>
         <h1 class = "center">{comment}</h1>
         
